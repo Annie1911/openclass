@@ -1,6 +1,7 @@
 package com.example.openclass.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(Long id) {
-        return userRepository.findById(id).get();
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
     }
 
     public User addUser(User user) {
