@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.openclass.model.Book;
 import com.example.openclass.model.User;
 import com.example.openclass.repositories.UserRepository;
 
@@ -36,6 +37,14 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    
-    
+    public List<Book> getBookUsers(Long id) {
+        return userRepository.findById(id)
+        .map(User::getBooks)
+        .orElseThrow(()->new RuntimeException("Books not found"));
+    }
 }
+
+    
+    
+    
+

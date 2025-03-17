@@ -3,11 +3,11 @@ package com.example.openclass.model;
 
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.CascadeType;
+
+import java.util.List;
+
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
@@ -33,5 +33,20 @@ public class User {
     private String password;
 
     private int age;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable =false)
+    private Role role;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id", referencedColumnName = "id")
+    private Profile profile;
+
+    @OneToMany(mappedBy="user" ,cascade = CascadeType.ALL)
+    private List<Book> books;
+
+
+
 
 }
